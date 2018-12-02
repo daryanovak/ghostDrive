@@ -1,0 +1,40 @@
+﻿@model GhostDrive.Application.Users.Commands.Login.LoginUserCommand
+
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+
+@{
+    ViewData["Title"] = Localizer["LoginTitle"];
+}
+
+<div class="row">
+    <div class="col-md-3 col-md-offset-5">
+        <h2>@Localizer["LoginTitle"]</h2>
+        <form asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="formPart">
+                    <label asp-for="Login">@SharedLocalizer["LoginLabel"]</label>
+                    <input type="text" asp-for="Login" class="form-control" />
+                    <span asp-validation-for="Login" class="text-danger"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="formPart">
+                    <label asp-for="Password">@SharedLocalizer["PasswordLabel"]</label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value=@SharedLocalizer["Login"] class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

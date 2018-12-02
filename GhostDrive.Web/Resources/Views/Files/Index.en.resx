@@ -120,6 +120,9 @@
   <data name="FileNameLabel" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="FilesTitle" xml:space="preserve">
+    <value>Files</value>
+  </data>
   <data name="FileUploadDateLabel" xml:space="preserve">
     <value>Uploaded</value>
   </data>

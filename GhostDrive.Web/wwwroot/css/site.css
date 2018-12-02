@@ -28,6 +28,13 @@ body {
     margin: 15px;
 }
 
+#languageSelector {
+    padding-top: 10px;
+    height: 50px;
+    width: 150px;
+    padding-right: 20px;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */

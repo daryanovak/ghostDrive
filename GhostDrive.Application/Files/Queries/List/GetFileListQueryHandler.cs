@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GhostDrive.Application.Files.Queries.List
 {
-    public class GetFileListQueryHander : IRequestHandler<GetFileListQuery, IEnumerable<FileDto>>
+    public class GetFileListQueryHandler : IRequestHandler<GetFileListQuery, IEnumerable<FileDto>>
     {
         private readonly GhostDriveDbContext _context;
 
-        public GetFileListQueryHander(GhostDriveDbContext context)
+        public GetFileListQueryHandler(GhostDriveDbContext context)
         {
             _context = context;
         }

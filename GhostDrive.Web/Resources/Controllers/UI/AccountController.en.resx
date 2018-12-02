@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FileNameLabel" xml:space="preserve">
-    <value>Имя</value>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Incorrect password.</value>
   </data>
-  <data name="FilesTitle" xml:space="preserve">
-    <value>Файлы</value>
+  <data name="PasswordsAreNotEqual" xml:space="preserve">
+    <value>Passwords are not equal.</value>
   </data>
-  <data name="FileUploadDateLabel" xml:space="preserve">
-    <value>Загружен</value>
+  <data name="UserAlreadyExists" xml:space="preserve">
+    <value>User already exists.</value>
+  </data>
+  <data name="UserNotExists" xml:space="preserve">
+    <value>User doesn't exist.</value>
   </data>
 </root>

@@ -6,6 +6,6 @@ if "%1"=="" (
 )
 
 echo Adding migration %1 ...
-dotnet ef migrations add %1 --project ..\GhostDrive.Persistence
+dotnet ef migrations add %1 --project ..\GhostDrive.Persistence --startup-project ..\GhostDrive.Web
 
 :End

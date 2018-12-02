@@ -13,12 +13,15 @@
         .ToList();
 }
 
-<form asp-controller="Home" asp-action="SetLanguage"
-      asp-route-returnUrl="@Context.Request.Path"
-      method="post" class="form-horizontal">
-    <div class="form-group">
-        <select name="culture" onchange="this.form.submit();"
-                asp-for="@requestCulture.RequestCulture.UICulture.Name"
-                asp-items="cultureItems" class="form-control"></select>
-    </div>
-</form>
+<li id="languageSelector">
+    <form asp-controller="Home" asp-action="SetLanguage"
+          asp-route-returnUrl="@Context.Request.Path"
+          method="post" class="form-horizontal">
+        <div class="form-group">
+            <select name="culture" onchange="this.form.submit();"
+                    asp-for="@requestCulture.RequestCulture.UICulture.Name"
+                    asp-items="cultureItems" class="form-control">
+            </select>
+        </div>
+    </form>
+</li>

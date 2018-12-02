@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using System.Reflection;
-using GhostDrive.Application.Files.Queries.List;
+using System.Security.Cryptography;
 using MediatR;
 using MediatR.Pipeline;
 using Microsoft.AspNetCore.Builder;
@@ -10,9 +10,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using GhostDrive.Persistence;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
+using GhostDrive.Application.Files.Queries.List;
+using GhostDrive.Application.Interfaces;
+using GhostDrive.Common;
+using GhostDrive.Infrastructure.Common;
+using GhostDrive.Infrastructure.Services;
+using GhostDrive.Persistence;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace GhostDrive.Web
 {
@@ -28,6 +34,29 @@ namespace GhostDrive.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add services
+            services.AddTransient<IDateTime, ApplicationDateTime>();
+            services.AddTransient<IAccountService, AccountService>();
+
+            // Add external services
+            services.AddSingleton<SHA256, SHA256Managed>();
+            services.AddSingleton(RandomNumberGenerator.Create());
+
+            // Add MediatR
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
+            services.AddMediatR(typeof(GetFileListQueryHandler).GetTypeInfo().Assembly);
+
+            // Add DbContext using SQL Server Provider
+            services.AddDbContext<GhostDriveDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("GhostDriveDatabase")));
+
+            // Add Cookie Authentication
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new PathString("/Account/Login");
+                });
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -35,17 +64,13 @@ namespace GhostDrive.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            // Add MediatR
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
-            services.AddMediatR(typeof(GetFileListQueryHander).GetTypeInfo().Assembly);
-
-            // Add DbContext using SQL Server Provider
-            services.AddDbContext<GhostDriveDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("GhostDriveDatabase")));
-
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc()
-                .AddDataAnnotationsLocalization()
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                        factory.Create(typeof(SharedResources));
+                })
                 .AddViewLocalization()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -82,6 +107,8 @@ namespace GhostDrive.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

@@ -6,14 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Files\Commands\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GhostDrive.Common\GhostDrive.Common.csproj" />
     <ProjectReference Include="..\GhostDrive.Domain\GhostDrive.Domain.csproj" />
     <ProjectReference Include="..\GhostDrive.Persistence\GhostDrive.Persistence.csproj" />
   </ItemGroup>

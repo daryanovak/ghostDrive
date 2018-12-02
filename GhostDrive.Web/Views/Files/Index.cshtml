@@ -1,17 +1,15 @@
 ﻿@model IEnumerable<GhostDrive.Application.Models.FileDto>
 
 @using Microsoft.AspNetCore.Mvc.Localization
+
 @inject IViewLocalizer Localizer
 
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+
 @{
-    ViewData["Title"] = "View";
+    ViewData["Title"] = Localizer["FilesTitle"];
 }
 
-<h2>View</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -32,12 +30,13 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => DateTime.Now)
+                    @Html.DisplayFor(modelItem => item.UploadDate)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <form asp-action="Delete" asp-controller="Files" method="post">
+                        <input type="submit" value=@SharedLocalizer["DeleteButton"] class="btn btn-danger" />
+                        <input name="id" type="hidden" value=@item.Id />
+                    </form>
                 </td>
             </tr>
         }

@@ -8,6 +8,8 @@ namespace GhostDrive.Application.Models
     {
         public string Name { get; set; }
 
+        public DateTime UploadDate { get; set; }
+
         public static Expression<Func<File, FileDto>> Projection
         {
             get
@@ -15,7 +17,8 @@ namespace GhostDrive.Application.Models
                 return file => new FileDto
                 {
                     Id = file.Id,
-                    Name = $"{file.Name}.{file.Extension}"
+                    Name = $"{file.Name}.{file.Extension}",
+                    UploadDate = file.UploadDate
                 };
             }
         }
