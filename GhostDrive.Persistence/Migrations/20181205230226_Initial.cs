@@ -32,9 +32,10 @@ namespace GhostDrive.Persistence.Migrations
                     FileId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: false),
-                    Location = table.Column<string>(nullable: true),
+                    LocalName = table.Column<string>(nullable: true),
                     Extension = table.Column<string>(nullable: true),
-                    SizeBytes = table.Column<int>(nullable: false),
+                    ContentType = table.Column<string>(nullable: true),
+                    SizeBytes = table.Column<long>(nullable: false),
                     UploadDate = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },

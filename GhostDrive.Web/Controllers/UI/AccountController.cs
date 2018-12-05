@@ -57,7 +57,7 @@ namespace GhostDrive.Web.Controllers.UI
                 var result = await Mediator.Send(command);
                 if (result.IsSuccess)
                 {
-                    await Authenticate(command.Login);
+                    await Authenticate(result.Result);
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError(string.Empty, localizer[result.FailureReason]);
@@ -75,10 +75,16 @@ namespace GhostDrive.Web.Controllers.UI
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, login)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, login),
             };
             var id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+
+        private async Task Authenticate(ClaimsIdentity claimsIdentity)
+        {
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity));
         }
     }
 }

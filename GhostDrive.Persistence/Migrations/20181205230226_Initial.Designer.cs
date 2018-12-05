@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GhostDrive.Persistence.Migrations
 {
     [DbContext(typeof(GhostDriveDbContext))]
-    [Migration("20181202202908_Initial")]
+    [Migration("20181205230226_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,14 +28,16 @@ namespace GhostDrive.Persistence.Migrations
                         .HasColumnName("FileId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ContentType");
+
                     b.Property<string>("Extension");
 
-                    b.Property<string>("Location");
+                    b.Property<string>("LocalName");
 
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<int>("SizeBytes");
+                    b.Property<long>("SizeBytes");
 
                     b.Property<DateTime>("UploadDate");
 

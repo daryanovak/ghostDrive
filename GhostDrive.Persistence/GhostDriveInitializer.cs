@@ -36,10 +36,10 @@ namespace GhostDrive.Persistence
                 Role = UserRole.Admin,
                 RegistrationDate = DateTime.Now
             };
-            foreach (var file in GetFiles())
+            /*foreach (var file in GetFiles())
             {
                 user.Files.Add(file);
-            }
+            }*/
 
             context.Users.Add(user);
 
@@ -53,7 +53,7 @@ namespace GhostDrive.Persistence
                 {
                     Name = $"File_{index}",
                     Extension = "txt",
-                    Location = "",
+                    LocalName = "",
                     SizeBytes = 1024,
                     UploadDate = DateTime.Now
                 });
