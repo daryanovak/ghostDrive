@@ -37,6 +37,7 @@ namespace GhostDrive.Web
             // Add services
             services.AddTransient<IDateTime, ApplicationDateTime>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IFileService, FileService>();
 
             // Add external services
             services.AddSingleton<SHA256, SHA256Managed>();

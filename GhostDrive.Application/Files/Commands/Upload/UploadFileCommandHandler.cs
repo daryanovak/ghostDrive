@@ -1,8 +1,8 @@
 ﻿using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using GhostDrive.Application.Constants;
+using GhostDrive.Application.Interfaces;
 using GhostDrive.Application.Models;
 using GhostDrive.Common;
 using GhostDrive.Persistence;
@@ -16,11 +16,13 @@ namespace GhostDrive.Application.Files.Commands.Upload
         private const char ExtensionDelimiter = '.';
 
         private readonly GhostDriveDbContext _context;
+        private readonly IFileService _fileService;
         private readonly IDateTime _dateTime;
 
-        public UploadFileCommandHandler(GhostDriveDbContext context, IDateTime dateTime)
+        public UploadFileCommandHandler(GhostDriveDbContext context, IFileService fileService, IDateTime dateTime)
         {
             _context = context;
+            _fileService = fileService;
             _dateTime = dateTime;
         }
 
@@ -29,25 +31,14 @@ namespace GhostDrive.Application.Files.Commands.Upload
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == request.UserName, cancellationToken);
             if (user == null)
             {
-                return CommandResult.Fail("UserNotExists");
+                return CommandResult.Fail(CommandErrors.UserNotExists);
             }
 
             var localName = Guid.NewGuid().ToString();
-
-            try
+            var saveResult = await _fileService.SaveFile(request.FileStream, localName, cancellationToken);
+            if (!saveResult)
             {
-                var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), ApplicationConstants.DriveFolder);
-                Directory.CreateDirectory(directoryPath);
-                var path = Path.Combine(directoryPath, localName);
-
-                using (var stream = new FileStream(path, FileMode.Create))
-                {
-                    await request.FileStream.CopyToAsync(stream, cancellationToken);
-                }
-            }
-            catch (Exception e)
-            {
-                return CommandResult.Fail(e.Message);
+                return CommandResult.Fail(CommandErrors.FileSave);
             }
 
             var filename = request.FileName.Split(ExtensionDelimiter);

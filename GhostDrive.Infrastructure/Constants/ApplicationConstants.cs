@@ -1,4 +1,4 @@
-﻿namespace GhostDrive.Application.Constants
+﻿namespace GhostDrive.Infrastructure.Constants
 {
     public static class ApplicationConstants
     {

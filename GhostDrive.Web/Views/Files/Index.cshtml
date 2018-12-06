@@ -23,33 +23,33 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UploadDate)
-            </td>
-            <td style="float: right;">
-                <div style="display: inline-block">
-                    <form asp-action="Delete" asp-controller="FileTransfer" asp-route-id="@item.Id" method="post">
-                        <input type="submit" value=@SharedLocalizer["DeleteButton"] class="btn btn-danger"/>
-                    </form>
-                </div>
-                <div style="display: inline-block">
-                    <form asp-action="Download" asp-controller="FileTransfer" asp-route-id="@item.Id" method="post">
-                        <input type="submit" value=@SharedLocalizer["DownloadButton"] class="btn btn-success"/>
-                    </form>
-                </div>
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UploadDate)
+                </td>
+                <td style="float: right;">
+                    <div style="display: inline-block">
+                        <form asp-action="Delete" asp-controller="FileTransfer" asp-route-id="@item.Id" method="post">
+                            <input type="submit" value=@SharedLocalizer["DeleteButton"] class="btn btn-danger" />
+                        </form>
+                    </div>
+                    <div style="display: inline-block">
+                        <form asp-action="Download" asp-controller="FileTransfer" asp-route-id="@item.Id" method="post">
+                            <input type="submit" value=@SharedLocalizer["DownloadButton"] class="btn btn-success" />
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
-<form method="post" enctype="multipart/form-data" asp-controller="FileTransfer" asp-action="UploadFile">
+<form method="post" enctype="multipart/form-data" asp-controller="FileTransfer" asp-action="Upload">
     <input type="file" name="file" />
     <button type="submit">Upload File</button>
 </form>

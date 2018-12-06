@@ -11,7 +11,7 @@ namespace GhostDrive.Web.Controllers.Api
     public class FileTransferController : ApiBaseController
     {
         [HttpPost]
-        public async Task<IActionResult> UploadFile(IFormFile file)
+        public async Task<IActionResult> Upload(IFormFile file)
         {
             if (file == null || file.Length == 0)
             {
