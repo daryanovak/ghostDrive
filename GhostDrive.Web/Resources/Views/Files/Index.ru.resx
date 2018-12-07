@@ -126,4 +126,7 @@
   <data name="FileUploadDateLabel" xml:space="preserve">
     <value>Загружен</value>
   </data>
+  <data name="DropzoneTitle" xml:space="preserve">
+    <value>Перетащите файл или кликните, чтобы выбрать</value>
+  </data>
 </root>

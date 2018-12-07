@@ -10,6 +10,12 @@
     ViewData["Title"] = Localizer["FilesTitle"];
 }
 
+<br/>
+
+<form method="post" asp-controller="FileTransfer" asp-action="Upload" class="dropzone" id="UploadForm" enctype="multipart/form-data">
+    <div class="dz-message" data-dz-message><span>@Localizer["DropzoneTitle"]</span></div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -49,8 +55,14 @@
     </tbody>
 </table>
 
-<form method="post" enctype="multipart/form-data" asp-controller="FileTransfer" asp-action="Upload">
-    <input type="file" name="file" />
-    <button type="submit">Upload File</button>
-</form>
-
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var myDropzone = Dropzone.forElement("#UploadForm");
+            myDropzone.on("complete",
+                function() {
+                    location.reload();
+                });
+        });
+    </script>
+}

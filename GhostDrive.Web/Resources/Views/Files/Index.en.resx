@@ -126,4 +126,7 @@
   <data name="FileUploadDateLabel" xml:space="preserve">
     <value>Uploaded</value>
   </data>
+  <data name="DropzoneTitle" xml:space="preserve">
+    <value>Drop file or click to upload</value>
+  </data>
 </root>

@@ -22,7 +22,7 @@ namespace GhostDrive.Application.Files.Queries.List
         {
             return await _context.Files
                 .Select(FileDto.Projection)
-                .OrderBy(p => p.Id)
+                .OrderByDescending(p => p.UploadDate)
                 .ToListAsync(cancellationToken);
         }
     }
