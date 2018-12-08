@@ -42,3 +42,24 @@ body {
         display: none;
     }
 }
+
+/* Files start */
+
+.fileActionButton {
+    display: inline-block
+}
+
+.fileActionGroup {
+    float: right;
+    border: none;
+}
+
+#UploadForm {
+    height: 300px;
+}
+
+.modal-title.alert {
+    margin-right: 15px;
+}
+
+/* Files end */

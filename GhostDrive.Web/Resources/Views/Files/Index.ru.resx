@@ -129,4 +129,10 @@
   <data name="DropzoneTitle" xml:space="preserve">
     <value>Перетащите файл или кликните, чтобы выбрать</value>
   </data>
+  <data name="FileSizeLabel" xml:space="preserve">
+    <value>Размер (байт)</value>
+  </data>
+  <data name="ShareModalLabel" xml:space="preserve">
+    <value>Поделиться</value>
+  </data>
 </root>

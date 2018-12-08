@@ -129,4 +129,10 @@
   <data name="DropzoneTitle" xml:space="preserve">
     <value>Drop file or click to upload</value>
   </data>
+  <data name="FileSizeLabel" xml:space="preserve">
+    <value>Size (bytes)</value>
+  </data>
+  <data name="ShareModalLabel" xml:space="preserve">
+    <value>Share</value>
+  </data>
 </root>

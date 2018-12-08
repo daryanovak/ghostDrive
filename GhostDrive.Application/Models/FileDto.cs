@@ -10,6 +10,8 @@ namespace GhostDrive.Application.Models
 
         public DateTime UploadDate { get; set; }
 
+        public long SizeBytes { get; set; } 
+
         public static Expression<Func<File, FileDto>> Projection
         {
             get
@@ -18,6 +20,7 @@ namespace GhostDrive.Application.Models
                 {
                     Id = file.Id,
                     Name = $"{file.Name}.{file.Extension}",
+                    SizeBytes = file.SizeBytes,
                     UploadDate = file.UploadDate
                 };
             }

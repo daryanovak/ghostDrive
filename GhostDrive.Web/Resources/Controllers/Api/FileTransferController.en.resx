@@ -117,46 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Admin" xml:space="preserve">
-    <value>Панель Управления</value>
-  </data>
-  <data name="AppName" xml:space="preserve">
-    <value>GhostDrive</value>
-  </data>
-  <data name="DeleteButton" xml:space="preserve">
-    <value>Удалить</value>
-  </data>
-  <data name="DownloadButton" xml:space="preserve">
-    <value>Скачать</value>
-  </data>
-  <data name="Error_FileSave" xml:space="preserve">
-    <value>Ошибка при сохранении файла.</value>
-  </data>
-  <data name="Error_ShortLink" xml:space="preserve">
-    <value>Ошибка при создании короткой ссылки.</value>
-  </data>
-  <data name="Error_UserNotExists" xml:space="preserve">
-    <value>Пользователь не существует.</value>
-  </data>
-  <data name="Files" xml:space="preserve">
-    <value>Файлы</value>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>Домой</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>Войти</value>
-  </data>
-  <data name="LoginLabel" xml:space="preserve">
-    <value>Логин</value>
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Выйти</value>
-  </data>
-  <data name="PasswordLabel" xml:space="preserve">
-    <value>Пароль</value>
-  </data>
-  <data name="Register" xml:space="preserve">
-    <value>Зарегистрироваться</value>
+  <data name="ShortLinkError" xml:space="preserve">
+    <value>Failed to create short link</value>
   </data>
 </root>

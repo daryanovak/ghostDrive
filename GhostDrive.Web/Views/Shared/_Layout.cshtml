@@ -10,9 +10,12 @@
     <title>@ViewData["Title"] - @SharedLocalizer["AppName"]</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/lib/dropzone/dist/dropzone.css"/>
-    <link rel="stylesheet" href="~/lib/dropzone/dist/basic.css"/>
+    <link rel="stylesheet" href="~/lib/dropzone/dist/dropzone.css" />
+    <link rel="stylesheet" href="~/lib/dropzone/dist/basic.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -33,6 +36,10 @@
                     {
                         <li><a asp-area="" asp-controller="Files" asp-action="Index">@SharedLocalizer["Files"]</a></li>
                     }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="" asp-controller="Admin" asp-action="Index">@SharedLocalizer["Admin"]</a></li>
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <partial name="_SelectLanguagePartial" />
@@ -50,6 +57,8 @@
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>  
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script> 
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/dropzone/dist/dropzone.js"></script>
     <script src="~/lib/tagcanvas/tagcanvas.js"></script>

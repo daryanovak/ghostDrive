@@ -10,8 +10,6 @@ namespace GhostDrive.Application.Files.Commands.Upload
 
         public string FileName { get; set; }
 
-        public string FileDetailsEndpoint { get; set; }
-
         public long SizeBytes { get; set; }
 
         public string ContentType { get; set; }

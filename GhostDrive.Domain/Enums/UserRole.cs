@@ -4,7 +4,7 @@
     {
         Common = 0,
 
-        Moderator = 1,
+        TechSupport = 1,
 
         Admin = 2
     }
