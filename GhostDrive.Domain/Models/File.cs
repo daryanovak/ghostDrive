@@ -10,6 +10,8 @@ namespace GhostDrive.Domain.Models
 
         public string Extension { get; set; }
 
+        public string ShortLink { get; set; }
+
         public string ContentType { get; set; }
 
         public long SizeBytes { get; set; }

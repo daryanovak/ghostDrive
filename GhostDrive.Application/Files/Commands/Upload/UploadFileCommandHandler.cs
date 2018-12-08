@@ -17,12 +17,18 @@ namespace GhostDrive.Application.Files.Commands.Upload
 
         private readonly GhostDriveDbContext _context;
         private readonly IFileService _fileService;
+        private readonly IShortLinkService _shortLinkService;
         private readonly IDateTime _dateTime;
 
-        public UploadFileCommandHandler(GhostDriveDbContext context, IFileService fileService, IDateTime dateTime)
+        public UploadFileCommandHandler(
+            GhostDriveDbContext context,
+            IFileService fileService,
+            IShortLinkService shortLinkService,
+            IDateTime dateTime)
         {
             _context = context;
             _fileService = fileService;
+            _shortLinkService = shortLinkService;
             _dateTime = dateTime;
         }
 
@@ -35,6 +41,12 @@ namespace GhostDrive.Application.Files.Commands.Upload
             }
 
             var localName = Guid.NewGuid().ToString();
+            var shortLink = await _shortLinkService.GetShortLink($"{request.FileDetailsEndpoint}/{localName}");
+            if (shortLink == null)
+            {
+                return CommandResult.Fail(CommandErrors.ShortLink);
+            }
+
             var saveResult = await _fileService.SaveFile(request.FileStream, localName, cancellationToken);
             if (!saveResult)
             {
@@ -43,11 +55,13 @@ namespace GhostDrive.Application.Files.Commands.Upload
 
             var filename = request.FileName.Split(ExtensionDelimiter);
 
+
             var file = new Domain.Models.File
             {
                 Name = filename[0],
                 Extension = filename[1],
                 LocalName = localName,
+                ShortLink = shortLink,
                 ContentType = request.ContentType,
                 SizeBytes = request.SizeBytes,
                 UploadDate = _dateTime.Now,

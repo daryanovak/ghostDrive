@@ -18,10 +18,12 @@ namespace GhostDrive.Web.Controllers.Api
                 return Content("file not selected");
             }
 
+            var fileDetailsLink = $"{Request.Scheme}://{Request.Host}{Url.Action("Index", "Files")}";
             await Mediator.Send(new UploadFileCommand
             {
                 FileStream = file.OpenReadStream(),
                 FileName = file.FileName,
+                FileDetailsEndpoint = fileDetailsLink,
                 SizeBytes = file.Length,
                 ContentType = file.ContentType,
                 UserName = User.Identity.Name

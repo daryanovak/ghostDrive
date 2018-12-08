@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using GhostDrive.Infrastructure.Constants;
 using GhostDrive.Application.Interfaces;
 using System.Threading;
 
@@ -9,6 +8,13 @@ namespace GhostDrive.Infrastructure.Services
 {
     public class FileService : IFileService
     {
+        private readonly string _driveFolder;
+
+        public FileService(string driveFolder)
+        {
+            _driveFolder = driveFolder;
+        }
+
         public async Task<bool> SaveFile(Stream stream, string fileName, CancellationToken cancellationToken)
         {
             try
@@ -59,14 +65,12 @@ namespace GhostDrive.Infrastructure.Services
             }
         }
 
-        private static string GetFilePath(string fileName)
+        private string GetFilePath(string fileName)
         {
-            return Path.Combine(Directory.GetCurrentDirectory(),
-                ApplicationConstants.DriveFolder,
-                fileName);
+            return Path.Combine(Directory.GetCurrentDirectory(), _driveFolder, fileName);
         }
 
-        private static string GetDirectoryPath()
+        private string GetDirectoryPath()
         {
             return GetFilePath(string.Empty);
         }

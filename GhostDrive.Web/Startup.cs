@@ -37,7 +37,12 @@ namespace GhostDrive.Web
             // Add services
             services.AddTransient<IDateTime, ApplicationDateTime>();
             services.AddTransient<IAccountService, AccountService>();
-            services.AddTransient<IFileService, FileService>();
+            services.AddTransient<IShortLinkService, ShortLinkService>();
+            services.AddSingleton<IFileService, FileService>(serviceProvider =>
+            {
+                var driveFolder = Configuration["DriveFolder"];
+                return new FileService(driveFolder);
+            });
 
             // Add external services
             services.AddSingleton<SHA256, SHA256Managed>();

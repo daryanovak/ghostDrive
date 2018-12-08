@@ -5,5 +5,7 @@
         public const string UserNotExists = "Error_UserNotExists";
 
         public const string FileSave = "Error_FileSave";
+
+        public const string ShortLink = "Error_ShortLink";
     }
 }
