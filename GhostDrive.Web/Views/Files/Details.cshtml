@@ -1,0 +1,73 @@
+﻿@model GhostDrive.Application.Models.FileDto
+
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<br/>
+<div class="row">
+    <div class="col-md-4">
+        <div class="fileActionButton @if (Model.IsReadonly(User.Identity.Name))
+                                     {
+                                         @: hidden
+                                     }">
+            <button type="button" class="btn btn-info" onclick="share(event, @Model.Id, '@SharedLocalizer["ShortLinkGenerating"].Value')"
+                    data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["ShareButton"]">
+                <i class="fas fa-share-alt fa-lg"></i>
+            </button>
+        </div>
+        <div class="fileActionButton">
+            <form asp-action="Download" asp-controller="FileTransfer" asp-route-id="@Model.Id" method="post">
+                <button type="submit" class="btn btn-success" 
+                        data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["DownloadButton"]">
+                    <i class="fas fa-download"></i>
+                </button>
+            </form>
+        </div>
+        <div class="fileActionButton @if (Model.IsReadonly(User.Identity.Name))
+                                     {
+                                         @: hidden
+                                     }">
+            <form asp-action="Delete" asp-controller="FileTransfer" asp-route-id="@Model.Id" method="post">
+                <button type="submit" class="btn btn-danger" 
+                        data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["DeleteButton"]">
+                    <i class="far fa-trash-alt fa-lg"></i>
+                </button>
+            </form>
+        </div>
+        <hr/>
+        <input name="fileId" id="fileId" hidden/>
+        <label asp-for="Name">@Localizer["NameLabel"]</label>
+        <input type="text" asp-for="Name" class="form-control" readonly/>
+        <br/>
+        <label asp-for="SizeBytes">@Localizer["SizeBytesLabel"]</label>
+        <input type="text" asp-for="SizeBytes" class="form-control" readonly/>
+        <br/>
+        <label asp-for="UploadDate">@Localizer["UploadDateLabel"]</label>
+        <input type="text" asp-for="UploadDate" class="form-control" readonly/>
+        <br/>
+        <label asp-for="UserName">@Localizer["UserNameLabel"]</label>
+        <input type="text" asp-for="UserName" class="form-control" readonly/>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
+<br/>
+<div>
+    <a asp-action="Index" class="btn btn-success">
+        <i class="fas fa-arrow-left fa-lg"></i>
+    </a>
+</div>
+
+<partial name="_ShareModal"/>
+
+@section Scripts {
+    <script src="~/js/shareModal.js" asp-append-version="true"></script>
+}

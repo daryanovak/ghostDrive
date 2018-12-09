@@ -10,5 +10,7 @@ namespace GhostDrive.Web.Controllers.UI
         private IMediator _mediator;
 
         protected IMediator Mediator => _mediator ?? (_mediator = HttpContext.RequestServices.GetService<IMediator>());
+
+        protected string CurrentUser => User.Identity.Name;
     }
 }

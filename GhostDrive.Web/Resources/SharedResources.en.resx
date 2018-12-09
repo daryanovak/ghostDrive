@@ -132,11 +132,17 @@
   <data name="DownloadButton" xml:space="preserve">
     <value>Download</value>
   </data>
+  <data name="Error_FileAlreadyShared" xml:space="preserve">
+    <value>File is already shared.</value>
+  </data>
   <data name="Error_FileSave" xml:space="preserve">
     <value>Error while file saving.</value>
   </data>
   <data name="Error_ShortLink" xml:space="preserve">
     <value>Short link creation error.</value>
+  </data>
+  <data name="Error_UserIsOwner" xml:space="preserve">
+    <value>User is owner.</value>
   </data>
   <data name="Error_UserNotExists" xml:space="preserve">
     <value>User doesn't exist.</value>
@@ -144,8 +150,8 @@
   <data name="Files" xml:space="preserve">
     <value>Files</value>
   </data>
-  <data name="Home" xml:space="preserve">
-    <value>Home</value>
+  <data name="HelloUser" xml:space="preserve">
+    <value>Hello, {0}!</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
@@ -161,5 +167,14 @@
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="ShareButton" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="Shared" xml:space="preserve">
+    <value>Shared</value>
+  </data>
+  <data name="ShortLinkGenerating" xml:space="preserve">
+    <value>Short link generating...</value>
   </data>
 </root>

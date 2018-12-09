@@ -9,6 +9,7 @@ namespace GhostDrive.Domain.Models
         public User()
         {
             Files = new List<File>();
+            SharedFiles = new List<SharedFile>();
         }
 
         public string Login { get; set; }
@@ -21,6 +22,8 @@ namespace GhostDrive.Domain.Models
 
         public DateTime RegistrationDate { get; set; }
 
-        public ICollection<File> Files { get; }
+        public virtual ICollection<File> Files { get; }
+
+        public virtual ICollection<SharedFile> SharedFiles { get; }
     }
 }

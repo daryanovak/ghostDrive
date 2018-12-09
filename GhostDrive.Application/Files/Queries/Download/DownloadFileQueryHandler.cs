@@ -36,7 +36,6 @@ namespace GhostDrive.Application.Files.Queries.Download
                 Name = file.FullName,
                 ContentType = file.ContentType
             };
-
         }
     }
 }

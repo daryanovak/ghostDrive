@@ -35,6 +35,9 @@ body {
     padding-right: 20px;
 }
 
+.helloUser {
+    padding-right: 20px;
+}
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
@@ -46,12 +49,8 @@ body {
 /* Files start */
 
 .fileActionButton {
-    display: inline-block
-}
-
-.fileActionGroup {
-    float: right;
-    border: none;
+    display: inline-block;
+    padding: 0 10px 0 0;
 }
 
 #UploadForm {
@@ -60,6 +59,10 @@ body {
 
 .modal-title.alert {
     margin-right: 15px;
+}
+
+.table tbody tr:hover td, .table tbody tr:hover th {
+    background-color: #d3d3d3;
 }
 
 /* Files end */

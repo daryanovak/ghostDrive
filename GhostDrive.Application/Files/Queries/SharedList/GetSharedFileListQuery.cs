@@ -2,11 +2,11 @@
 using GhostDrive.Application.Models;
 using MediatR;
 
-namespace GhostDrive.Application.Files.Queries.List
+namespace GhostDrive.Application.Files.Queries.SharedList
 {
-    public class GetFileListQuery : IRequest<IEnumerable<FileDto>>
+    public class GetSharedFileListQuery : IRequest<IEnumerable<FileDto>>
     {
-        public GetFileListQuery(string userLogin)
+        public GetSharedFileListQuery(string userLogin)
         {
             UserLogin = userLogin;
         }

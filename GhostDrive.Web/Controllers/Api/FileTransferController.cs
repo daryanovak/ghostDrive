@@ -69,7 +69,7 @@ namespace GhostDrive.Web.Controllers.Api
         [HttpGet]
         public async Task<string> GetShortLink(int id)
         {
-            var fileDetailsLink = $"{Request.Scheme}://{Request.Host}{Url.Action("Index", "Files")}";
+            var fileDetailsLink = $"{Request.Scheme}://{Request.Host}{Url.Action("Details", "Files")}";
             var shortLink = await Mediator.Send(new GetShortLinkQuery(id, fileDetailsLink));
             return shortLink ?? _localizer["ShortLinkError"];
         }

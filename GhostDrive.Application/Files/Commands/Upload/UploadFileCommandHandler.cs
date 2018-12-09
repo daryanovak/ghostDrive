@@ -46,7 +46,6 @@ namespace GhostDrive.Application.Files.Commands.Upload
 
             var filename = request.FileName.Split(ExtensionDelimiter);
 
-
             var file = new Domain.Models.File
             {
                 Name = filename[0],
@@ -56,7 +55,6 @@ namespace GhostDrive.Application.Files.Commands.Upload
                 SizeBytes = request.SizeBytes,
                 UploadDate = _dateTime.Now,
                 UserId = user.Id
-                
             };
             _context.Files.Add(file);
             await _context.SaveChangesAsync(cancellationToken);

@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="alert alert-danger modal-title" id="shareErrorAlert"></div>
+            </div>
+            <div class="modal-body">
+                <input name="fileId" id="fileId" hidden />
+                <input name="shortLink" id="shortLink" class="form-control" readonly />
+                <br />
+                <label name="userLabel">@SharedLocalizer["LoginLabel"]</label>
+                <input name="userToShare" id="userToShare" class="form-control" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="shareToUser()">@SharedLocalizer["Share"]</button>
+            </div>
+        </div>
+    </div>
+</div>

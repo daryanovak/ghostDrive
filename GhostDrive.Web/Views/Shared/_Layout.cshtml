@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
+﻿@using GhostDrive.Domain.Enums
+@using Microsoft.AspNetCore.Mvc.Localization
 
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
@@ -31,19 +32,28 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"]</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li><a asp-area="" asp-controller="Files" asp-action="Index">@SharedLocalizer["Files"]</a></li>
                     }
                     @if (User.Identity.IsAuthenticated)
                     {
+                        <li><a asp-area="" asp-controller="Files" asp-action="Shared">@SharedLocalizer["Shared"]</a></li>
+                    }
+                    @if (User.IsInRole(UserRole.Admin.ToString()))
+                    {
                         <li><a asp-area="" asp-controller="Admin" asp-action="Index">@SharedLocalizer["Admin"]</a></li>
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <partial name="_SelectLanguagePartial" />
-                    <partial name="_LoginPartial" />
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="helloUser">
+                            <a>@string.Format(SharedLocalizer["HelloUser"].Value, User.Identity.Name)</a>
+                        </li>
+                    }
+                    <partial name="_SelectLanguagePartial"/>
+                    <partial name="_LoginPartial"/>
                 </ul>
             </div>
         </div>

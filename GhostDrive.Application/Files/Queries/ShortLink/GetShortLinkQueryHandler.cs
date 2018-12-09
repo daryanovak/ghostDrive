@@ -19,10 +19,11 @@ namespace GhostDrive.Application.Files.Queries.ShortLink
 
         public async Task<string> Handle(GetShortLinkQuery request, CancellationToken cancellationToken)
         {
+            //return "Temp empty";
             var file = await _context.Files.FindAsync(request.FileId);
             if (string.IsNullOrEmpty(file.ShortLink))
             {
-                file.ShortLink = await _shortLinkService.GetShortLink($"{request.Endpoint}/{file.LocalName}");
+                file.ShortLink = await _shortLinkService.GetShortLink($"{request.Endpoint}/{file.Id}/{file.LocalName}");
                 _context.Files.Update(file);
                 await _context.SaveChangesAsync(cancellationToken);
             }

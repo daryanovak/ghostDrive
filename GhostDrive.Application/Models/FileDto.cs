@@ -10,7 +10,11 @@ namespace GhostDrive.Application.Models
 
         public DateTime UploadDate { get; set; }
 
-        public long SizeBytes { get; set; } 
+        public long SizeBytes { get; set; }
+
+        public string UserName { get; set; }
+
+        public bool IsReadonly(string user) => !UserName.Equals(user);
 
         public static Expression<Func<File, FileDto>> Projection
         {
@@ -21,7 +25,8 @@ namespace GhostDrive.Application.Models
                     Id = file.Id,
                     Name = $"{file.Name}.{file.Extension}",
                     SizeBytes = file.SizeBytes,
-                    UploadDate = file.UploadDate
+                    UploadDate = file.UploadDate,
+                    UserName = file.User.Login
                 };
             }
         }
