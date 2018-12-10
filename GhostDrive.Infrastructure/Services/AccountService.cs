@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using GhostDrive.Application.Interfaces;
@@ -30,6 +32,18 @@ namespace GhostDrive.Infrastructure.Services
             var bytes = Encoding.UTF8.GetBytes(string.Concat(password, salt));
             var hash = _hashAlgorithm.ComputeHash(bytes);
             return Convert.ToBase64String(hash);
+        }
+
+        public ClaimsIdentity GetClaimsIdentity(string login, string role)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, login),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, role)
+            };
+
+            return new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
+                ClaimsIdentity.DefaultRoleClaimType);
         }
     }
 }

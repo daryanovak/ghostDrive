@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using GhostDrive.Application.Files.Commands.Delete;
 using GhostDrive.Application.Files.Commands.Share;
+using GhostDrive.Application.Files.Commands.Update;
 using GhostDrive.Application.Files.Commands.Upload;
 using GhostDrive.Application.Files.Queries.Download;
 using GhostDrive.Application.Files.Queries.ShortLink;
@@ -42,7 +43,7 @@ namespace GhostDrive.Web.Controllers.Api
                 UserName = User.Identity.Name
             });
 
-            return RedirectToFilesPage();
+            return Ok();
         }
 
         [HttpPost]
@@ -72,6 +73,18 @@ namespace GhostDrive.Web.Controllers.Api
             var fileDetailsLink = $"{Request.Scheme}://{Request.Host}{Url.Action("Details", "Files")}";
             var shortLink = await Mediator.Send(new GetShortLinkQuery(id, fileDetailsLink));
             return shortLink ?? _localizer["ShortLinkError"];
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateTags([FromBody] UpdateFileCommand command)
+        {
+            var result = await Mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok();
+            }
+
+            return BadRequest(_sharedLocalizer[result.FailureReason].Value);
         }
 
         [HttpPost]

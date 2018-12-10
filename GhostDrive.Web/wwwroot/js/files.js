@@ -1,8 +1,10 @@
 ﻿$(document).ready(function() {
     var myDropzone = Dropzone.forElement("#UploadForm");
     myDropzone.on("complete",
-        function() {
-            location.reload();
+        function () {
+            var actionPathPart = "Files/Index";
+            var index = location.href.indexOf(actionPathPart);
+            location.href = location.href.substring(0, index + actionPathPart.length);
         });
     try {
         TagCanvas.textColour = "#ff0000";

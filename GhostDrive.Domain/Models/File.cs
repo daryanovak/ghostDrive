@@ -8,6 +8,7 @@ namespace GhostDrive.Domain.Models
         public File()
         {
             SharedFiles = new List<SharedFile>();
+            Tags = new List<FileTag>();
         }
 
         public string Name { get; set; }
@@ -26,10 +27,12 @@ namespace GhostDrive.Domain.Models
 
         public int UserId { get; set; }
 
-        public virtual User User { get; set; }
+        public User User { get; set; }
 
         public string FullName => $"{Name}.{Extension}";
 
-        public virtual ICollection<SharedFile> SharedFiles { get; }
+        public ICollection<SharedFile> SharedFiles { get; }
+
+        public ICollection<FileTag> Tags { get; }
     }
 }

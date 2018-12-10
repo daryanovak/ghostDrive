@@ -15,6 +15,8 @@ namespace GhostDrive.Persistence
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Tag> Tags { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyAllConfigurations();

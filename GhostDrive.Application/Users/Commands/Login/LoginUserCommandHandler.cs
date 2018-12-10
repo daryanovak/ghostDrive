@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using GhostDrive.Application.Interfaces;
 using GhostDrive.Application.Models;
 using GhostDrive.Persistence;
-using System.Collections.Generic;
 
 namespace GhostDrive.Application.Users.Commands.Login
 {
@@ -36,14 +35,9 @@ namespace GhostDrive.Application.Users.Commands.Login
             {
                 return CommandResult<ClaimsIdentity>.Fail("IncorrectPassword");
             }
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString())
-            };
 
-            return CommandResult<ClaimsIdentity>.Success(new ClaimsIdentity(claims, "ApplicationCookie",
-                ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType));
+            var result = _accountService.GetClaimsIdentity(user.Login, user.Role.ToString());
+            return CommandResult<ClaimsIdentity>.Success(result);
         }
     }
 }

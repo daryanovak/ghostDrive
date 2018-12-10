@@ -23,6 +23,8 @@ namespace GhostDrive.Application.Files.Queries.Get
                 .Include(f => f.User)
                 .Include(f => f.SharedFiles)
                 .ThenInclude(l => l.User)
+                .Include(f => f.Tags)
+                .ThenInclude(t => t.Tag)
                 .Where(f => f.Id == request.Id)
                 .FirstOrDefaultAsync(cancellationToken);
 

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ using GhostDrive.Domain.Enums;
 
 namespace GhostDrive.Application.Users.Commands.Register
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, CommandResult>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, CommandResult<ClaimsIdentity>>
     {
         private readonly GhostDriveDbContext _context;
         private readonly IAccountService _accountService;
@@ -27,15 +28,15 @@ namespace GhostDrive.Application.Users.Commands.Register
             _dateTime = dateTime;
         }
 
-        public async Task<CommandResult> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult<ClaimsIdentity>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             if (await _context.Users.AnyAsync(u => u.Login == request.Login, cancellationToken))
             {
-                return CommandResult.Fail("UserAlreadyExists");
+                return CommandResult<ClaimsIdentity>.Fail("UserAlreadyExists");
             }
             if (!request.Password.Equals(request.ConfirmPassword))
             {
-                return CommandResult.Fail("PasswordsAreNotEqual");
+                return CommandResult<ClaimsIdentity>.Fail("PasswordsAreNotEqual");
             }
 
             var passwordSalt = _accountService.GenerateSalt();
@@ -54,7 +55,8 @@ namespace GhostDrive.Application.Users.Commands.Register
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return CommandResult.Success;
+            var result = _accountService.GetClaimsIdentity(entity.Login, entity.Role.ToString());
+            return CommandResult<ClaimsIdentity>.Success(result);
         }
     }
 }

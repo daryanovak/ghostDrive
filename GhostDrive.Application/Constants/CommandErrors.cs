@@ -11,5 +11,7 @@
         public const string AlreadyShared = "Error_FileAlreadyShared";
 
         public const string UserIsOwner = "Error_UserIsOwner";
+
+        public const string FileNotFound = "Error_FileNotFound";
     }
 }

@@ -132,6 +132,9 @@
   <data name="Error_FileAlreadyShared" xml:space="preserve">
     <value>Файл уже доступный.</value>
   </data>
+  <data name="Error_FileNotFound" xml:space="preserve">
+    <value>Файл не найден</value>
+  </data>
   <data name="Error_FileSave" xml:space="preserve">
     <value>Ошибка при сохранении файла.</value>
   </data>

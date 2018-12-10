@@ -20,9 +20,14 @@ namespace GhostDrive.Application.Files.Queries.List
 
         public async Task<IEnumerable<FileDto>> Handle(GetFileListQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Files
-                .Where(file => file.User.Login.Equals(request.UserLogin))
-                .Select(FileDto.Projection)
+            var files = _context.Files.Where(file => file.User.Login.Equals(request.UserLogin));
+
+            if (!string.IsNullOrEmpty(request.Tag))
+            {
+                files = files.Where(file => file.Tags.Any(t => t.Tag.Name == request.Tag));
+            }
+
+            return await files.Select(FileDto.Projection)
                 .OrderByDescending(p => p.UploadDate)
                 .ToListAsync(cancellationToken);
         }

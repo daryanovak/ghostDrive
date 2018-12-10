@@ -22,6 +22,5 @@ namespace GhostDrive.Persistence.Configurations
                 .HasForeignKey(sharedFile => sharedFile.FileId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
-
     }
 }
