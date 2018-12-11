@@ -13,8 +13,10 @@
         TagCanvas.depth = 0.75;
         TagCanvas.maxSpeed = 0.1;
         TagCanvas.clickToFront = 1000;
+        TagCanvas.noTagsMessage = false;
+        //TagCanvas.minTags = 3;
         TagCanvas.Start("myCanvas");
     } catch (e) {
-        document.getElementById("myCanvasContainer").style.display = "none";
+        $("#myCanvasContainer").style.display = "none";
     }
 });

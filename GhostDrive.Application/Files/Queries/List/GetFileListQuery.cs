@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using GhostDrive.Application.Models;
+﻿using GhostDrive.Application.Models.ViewModels;
 using MediatR;
 
 namespace GhostDrive.Application.Files.Queries.List
 {
-    public class GetFileListQuery : IRequest<IEnumerable<FileDto>>
+    public class GetFileListQuery : IRequest<FilesViewModel>
     {
         public GetFileListQuery(string userLogin, string tag)
         {

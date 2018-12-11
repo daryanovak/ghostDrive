@@ -13,9 +13,9 @@ namespace GhostDrive.Web.Controllers.UI
         [Route("{tag?}")]
         public async Task<IActionResult> Index(string tag)
         {
-            var files = await Mediator.Send(new GetFileListQuery(CurrentUser, tag));
+            var result = await Mediator.Send(new GetFileListQuery(CurrentUser, tag));
             RouteData.Values.Remove("tag");
-            return View(files);
+            return View(result);
         }
 
         [Authorize]

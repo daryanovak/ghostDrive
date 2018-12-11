@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GhostDrive.Application.Models.FileDto>
+﻿@model GhostDrive.Application.Models.ViewModels.FilesViewModel
 
 @using Microsoft.AspNetCore.Mvc.Localization
 
@@ -12,15 +12,17 @@
 
 <br />
 
-<div align="center" id="myCanvasContainer">
+<div align="center" id="myCanvasContainer" @{if (!Model.Tags.Any())
+                                             {
+                                                 @: hidden
+                                             }
+                                           }>
     <canvas width="600" height="200" id="myCanvas">
         <ul>
-            <li><a asp-controller="Files" asp-action="Index" asp-route-tag="Basik">Basik</a></li>
-            <li><a asp-controller="Files" asp-action="Index" asp-route-tag="Basik">Basik</a></li>
-            <li><a asp-controller="Files" asp-action="Index" asp-route-tag="Basik">Basik</a></li>
-            <li><a asp-controller="Files" asp-action="Index" asp-route-tag="Basik">Basik</a></li>
-            <li><a asp-controller="Files" asp-action="Index" asp-route-tag="Basik">Basik</a></li>
-            <li><a asp-controller="Files" asp-action="Index" asp-route-tag="Basik">Basik</a></li>
+            @foreach (var tag in Model.Tags)
+            {
+                <li><a asp-controller="Files" asp-action="Index" asp-route-tag="@tag">@tag</a></li>
+            }
         </ul>
     </canvas>
 </div>
@@ -45,7 +47,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Files)
         {
             <tr onclick="window.location='@Url.Action("Details", "Files", new {id = item.Id})';">
                 <td>

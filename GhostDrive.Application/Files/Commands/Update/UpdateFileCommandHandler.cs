@@ -24,24 +24,15 @@ namespace GhostDrive.Application.Files.Commands.Update
 
         public async Task<CommandResult> Handle(UpdateFileCommand request, CancellationToken cancellationToken)
         {
-            File file = null;
-            try
-            {
-                file = await _context.Files.Include(f => f.Tags).ThenInclude(f => f.Tag)
-                    .Where(f => f.Id == request.FileId).FirstOrDefaultAsync(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            var file = await _context.Files.Include(f => f.Tags).ThenInclude(f => f.Tag)
+                .Where(f => f.Id == request.FileId).FirstOrDefaultAsync(cancellationToken);
 
             if (file == null)
             {
                 return CommandResult.Fail(CommandErrors.FileNotFound);
             }
 
-            var tagNames = request.Tags.Split(TagSeparator);
+            var tagNames = request.Tags.Split(TagSeparator).Where(tag => !string.IsNullOrWhiteSpace(tag));
             file.Tags.Clear();
             foreach (var tagName in tagNames)
             {

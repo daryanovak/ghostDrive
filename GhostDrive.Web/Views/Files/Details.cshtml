@@ -11,6 +11,12 @@
 }
 
 <br />
+<div class="fileActionButton">
+    <a asp-action="Index" class="btn btn-success"
+       data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["BackButton"]">
+        <i class="fas fa-arrow-left fa-lg"></i>
+    </a>
+</div>
 <div class="fileActionButton @if (Model.IsReadonly(User.Identity.Name))
                              {
                                  @: hidden
@@ -22,7 +28,7 @@
 </div>
 <div class="fileActionButton">
     <form asp-action="Download" asp-controller="FileTransfer" asp-route-id="@Model.Id" method="post">
-        <button type="submit" class="btn btn-success"
+        <button type="submit" class="btn btn-success" onclick="this.blur();"
                 data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["DownloadButton"]">
             <i class="fas fa-download"></i>
         </button>
@@ -33,7 +39,7 @@
                                  @: hidden
                              }">
     <form asp-action="Delete" asp-controller="FileTransfer" asp-route-id="@Model.Id" method="post">
-        <button type="submit" class="btn btn-danger"
+        <button type="submit" class="btn btn-danger" onclick="this.blur();"
                 data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["DeleteButton"]">
             <i class="far fa-trash-alt fa-lg"></i>
         </button>
@@ -80,11 +86,6 @@
     </div>
 </div>
 <br />
-<div>
-    <a asp-action="Index" class="btn btn-success">
-        <i class="fas fa-arrow-left fa-lg"></i>
-    </a>
-</div>
 
 <partial name="_ShareModal" />
 
