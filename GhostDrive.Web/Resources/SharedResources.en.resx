@@ -123,6 +123,9 @@
   <data name="AppName" xml:space="preserve">
     <value>GhostDrive</value>
   </data>
+  <data name="BackButton" xml:space="preserve">
+    <value>To files</value>
+  </data>
   <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="DownloadButton" xml:space="preserve">
     <value>Download</value>
+  </data>
+  <data name="EditButton" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="Error_FileAlreadyShared" xml:space="preserve">
     <value>File is already shared.</value>
@@ -170,6 +176,9 @@
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="ShareButton" xml:space="preserve">
     <value>Share</value>

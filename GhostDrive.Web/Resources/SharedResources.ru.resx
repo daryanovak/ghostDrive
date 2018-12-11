@@ -123,11 +123,17 @@
   <data name="AppName" xml:space="preserve">
     <value>GhostDrive</value>
   </data>
+  <data name="BackButton" xml:space="preserve">
+    <value>К файлам</value>
+  </data>
   <data name="DeleteButton" xml:space="preserve">
     <value>Удалить</value>
   </data>
   <data name="DownloadButton" xml:space="preserve">
     <value>Скачать</value>
+  </data>
+  <data name="EditButton" xml:space="preserve">
+    <value>Редактировать</value>
   </data>
   <data name="Error_FileAlreadyShared" xml:space="preserve">
     <value>Файл уже доступный.</value>
@@ -167,6 +173,9 @@
   </data>
   <data name="Register" xml:space="preserve">
     <value>Зарегистрироваться</value>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Сохранить</value>
   </data>
   <data name="ShareButton" xml:space="preserve">
     <value>Поделиться</value>
