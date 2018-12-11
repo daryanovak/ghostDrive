@@ -59,15 +59,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.SizeBytes)
                 </td>
-                <td class="row">
-                    <div class="col-md-2 col-md-offset-6 fileActionButton">
-                        <button type="button" class="btn btn-info"
-                                onclick="share(event, @item.Id, '@SharedLocalizer["ShortLinkGenerating"].Value')"
-                                data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["ShareButton"]">
-                            <i class="fas fa-share-alt fa-lg"></i>
-                        </button>
+                <td>
+                    <div class="fileActionButton floatRight">
+                        <form asp-action="Delete" asp-controller="FileTransfer" asp-route-id="@item.Id" method="post">
+                            <button type="submit" class="btn btn-danger"
+                                    data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["DeleteButton"]">
+                                <i class="far fa-trash-alt fa-lg"></i>
+                            </button>
+                        </form>
                     </div>
-                    <div class="col-md-2 fileActionButton">
+                    <div class="fileActionButton floatRight">
                         <form asp-action="Download" asp-controller="FileTransfer" asp-route-id="@item.Id" method="post">
                             <button type="submit" class="btn btn-success"
                                     data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["DownloadButton"]">
@@ -75,13 +76,12 @@
                             </button>
                         </form>
                     </div>
-                    <div class="col-md-2 fileActionButton">
-                        <form asp-action="Delete" asp-controller="FileTransfer" asp-route-id="@item.Id" method="post">
-                            <button type="submit" class="btn btn-danger"
-                                    data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["DeleteButton"]">
-                                <i class="far fa-trash-alt fa-lg"></i>
-                            </button>
-                        </form>
+                    <div class="fileActionButton floatRight">
+                        <button type="button" class="btn btn-info"
+                                onclick="share(event, @item.Id, '@SharedLocalizer["ShortLinkGenerating"].Value')"
+                                data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["ShareButton"]">
+                            <i class="fas fa-share-alt fa-lg"></i>
+                        </button>
                     </div>
                 </td>
             </tr>

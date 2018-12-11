@@ -8,6 +8,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    var readonlyMode = Model.IsReadonly(User.Identity.Name);
 }
 
 <br />
@@ -17,7 +18,7 @@
         <i class="fas fa-arrow-left fa-lg"></i>
     </a>
 </div>
-<div class="fileActionButton @if (Model.IsReadonly(User.Identity.Name))
+<div class="fileActionButton @if (readonlyMode)
                              {
                                  @: hidden
                              }">
@@ -34,7 +35,7 @@
         </button>
     </form>
 </div>
-<div class="fileActionButton @if (Model.IsReadonly(User.Identity.Name))
+<div class="fileActionButton @if (readonlyMode)
                              {
                                  @: hidden
                              }">
@@ -47,11 +48,14 @@
 </div>
 <hr />
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-5" @if (string.IsNullOrWhiteSpace(Model.Tags) && readonlyMode)
+                          {
+                              @: hidden
+                          }>
         <input id="tagsEditor" name="tagsEditor" type="text" value="@Model.Tags" />
         <input id="oldTags" name="oldTags" type="text" value="@Model.Tags" hidden />
     </div>
-    <div class="col-md-7" @if (Model.IsReadonly(User.Identity.Name))
+    <div class="col-md-7" @if (readonlyMode)
                           {
                               @: hidden
                           }>
