@@ -18,6 +18,7 @@ using GhostDrive.Common;
 using GhostDrive.Infrastructure.Common;
 using GhostDrive.Infrastructure.Services;
 using GhostDrive.Persistence;
+using GhostDrive.Web.TechSupport;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace GhostDrive.Web
@@ -92,6 +93,8 @@ namespace GhostDrive.Web
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,6 +124,11 @@ namespace GhostDrive.Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<TechSupportHub>("/techsupport");
             });
         }
     }

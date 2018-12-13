@@ -26,7 +26,7 @@
     <tbody>
     @foreach (var item in Model)
     {
-        <tr onclick="window.location='@Url.Action("Details", "Files", new {id = item.Id})';">
+        <file-row file-id="@item.Id">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -45,9 +45,7 @@
                     </form>
                 </div>
             </td>
-        </tr>
+        </file-row>
     }
     </tbody>
 </table>
-
-<partial name="_ShareModal"/>

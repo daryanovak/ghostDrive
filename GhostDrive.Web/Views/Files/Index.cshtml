@@ -1,4 +1,4 @@
-﻿@model GhostDrive.Application.Models.ViewModels.FilesViewModel
+﻿@model IEnumerable<GhostDrive.Application.Models.FileDto>
 
 @using Microsoft.AspNetCore.Mvc.Localization
 
@@ -10,22 +10,9 @@
     ViewData["Title"] = Localizer["FilesTitle"];
 }
 
-<br />
+<br/>
 
-<div align="center" id="myCanvasContainer" @{if (!Model.Tags.Any())
-                                             {
-                                                 @: hidden
-                                             }
-                                           }>
-    <canvas width="600" height="200" id="myCanvas">
-        <ul>
-            @foreach (var tag in Model.Tags)
-            {
-                <li><a asp-controller="Files" asp-action="Index" asp-route-tag="@tag">@tag</a></li>
-            }
-        </ul>
-    </canvas>
-</div>
+@await Component.InvokeAsync("TagCloud", new {userName = User.Identity.Name})
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">
     <i class="fas fa-plus fa-lg"></i>
@@ -33,59 +20,59 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Localizer["FileNameLabel"]
-            </th>
-            <th>
-                @Localizer["FileUploadDateLabel"]
-            </th>
-            <th>
-                @Localizer["FileSizeLabel"]
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Localizer["FileNameLabel"]
+        </th>
+        <th>
+            @Localizer["FileUploadDateLabel"]
+        </th>
+        <th>
+            @Localizer["FileSizeLabel"]
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Files)
-        {
-            <tr onclick="window.location='@Url.Action("Details", "Files", new {id = item.Id})';">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UploadDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SizeBytes)
-                </td>
-                <td>
-                    <div class="fileActionButton floatRight">
-                        <form asp-action="Delete" asp-controller="FileTransfer" asp-route-id="@item.Id" method="post">
-                            <button type="submit" class="btn btn-danger"
-                                    data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["DeleteButton"]">
-                                <i class="far fa-trash-alt fa-lg"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="fileActionButton floatRight">
-                        <form asp-action="Download" asp-controller="FileTransfer" asp-route-id="@item.Id" method="post">
-                            <button type="submit" class="btn btn-success"
-                                    data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["DownloadButton"]">
-                                <i class="fas fa-download"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="fileActionButton floatRight">
-                        <button type="button" class="btn btn-info"
-                                onclick="share(event, @item.Id, '@SharedLocalizer["ShortLinkGenerating"].Value')"
-                                data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["ShareButton"]">
-                            <i class="fas fa-share-alt fa-lg"></i>
+    @foreach (var item in Model)
+    {
+        <file-row file-id="@item.Id">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UploadDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SizeBytes)
+            </td>
+            <td>
+                <div class="fileActionButton floatRight">
+                    <form asp-action="Delete" asp-controller="FileTransfer" asp-route-id="@item.Id" method="post">
+                        <button type="submit" class="btn btn-danger"
+                                data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["DeleteButton"]">
+                            <i class="far fa-trash-alt fa-lg"></i>
                         </button>
-                    </div>
-                </td>
-            </tr>
-        }
+                    </form>
+                </div>
+                <div class="fileActionButton floatRight">
+                    <form asp-action="Download" asp-controller="FileTransfer" asp-route-id="@item.Id" method="post">
+                        <button type="submit" class="btn btn-success"
+                                data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["DownloadButton"]">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="fileActionButton floatRight">
+                    <button type="button" class="btn btn-info"
+                            onclick="share(event, @item.Id, '@SharedLocalizer["ShortLinkGenerating"].Value')"
+                            data-toggle="tooltip" data-placement="bottom" title="@SharedLocalizer["ShareButton"]">
+                        <i class="fas fa-share-alt fa-lg"></i>
+                    </button>
+                </div>
+            </td>
+        </file-row>
+    }
     </tbody>
 </table>
 
@@ -100,7 +87,9 @@
             </div>
             <div class="modal-body">
                 <form method="post" asp-controller="FileTransfer" asp-action="Upload" class="dropzone" id="UploadForm" enctype="multipart/form-data">
-                    <div class="dz-message" data-dz-message><span>@Localizer["DropzoneTitle"]</span></div>
+                    <div class="dz-message" data-dz-message>
+                        <span>@Localizer["DropzoneTitle"]</span>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -109,9 +98,10 @@
     </div>
 </div>
 
-<partial name="_ShareModal" />
+<partial name="_ShareModal"/>
 
 @section Scripts {
     <script src="~/js/files.js" asp-append-version="true"></script>
+    <script src="~/js/tagCloud.js" asp-append-version="true"></script>
     <script src="~/js/shareModal.js" asp-append-version="true"></script>
 }

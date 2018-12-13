@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["TechSupport"];
+}
+
+<div class="floating-chat">
+    <i class="fa fa-comments" aria-hidden="true"></i>
+    <div class="chat">
+        <div class="header">
+            <span class="title">
+                @SharedLocalizer["TechSupport"]
+            </span>
+            <button>
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+        </div>
+        <ul class="messages">
+            <li class="other">@SharedLocalizer["TechSupportGreeting"]</li>
+            <li class="self">Yes, please!</li>
+        </ul>
+        <div class="footer">
+            <div class="text-box" contenteditable="true" disabled="true"></div>
+            <button id="sendMessage">send</button>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/techSupport.js" asp-append-version="true"></script>
+}

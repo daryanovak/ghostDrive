@@ -37,11 +37,11 @@
                     <li>
                         <a asp-area="" asp-controller="Files" asp-action="Index">@SharedLocalizer["Files"]</a>
                     </li>
-                }
-                @if (User.Identity.IsAuthenticated)
-                {
                     <li>
                         <a asp-area="" asp-controller="Files" asp-action="Shared">@SharedLocalizer["Shared"]</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="TechSupport" asp-action="Index">@SharedLocalizer["TechSupport"]</a>
                     </li>
                 }
                 @if (User.IsInRole(UserRole.Admin.ToString()))
@@ -78,6 +78,7 @@
 <script src="~/lib/dropzone/dist/dropzone.js"></script>
 <script src="~/lib/tagcanvas/tagcanvas.js"></script>
 <script src="~/lib/tags-input/dist/jquery.tagsinput-revisited.min.js"></script>
+<script src="~/lib/signalr/signalr.min.js"></script>
 
 @RenderSection("Scripts", required: false)
 </body>

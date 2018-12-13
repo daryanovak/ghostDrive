@@ -189,4 +189,10 @@
   <data name="ShortLinkGenerating" xml:space="preserve">
     <value>Short link generating...</value>
   </data>
+  <data name="TechSupport" xml:space="preserve">
+    <value>Tech Support</value>
+  </data>
+  <data name="TechSupportGreeting" xml:space="preserve">
+    <value>Hello! Can I help you?</value>
+  </data>
 </root>

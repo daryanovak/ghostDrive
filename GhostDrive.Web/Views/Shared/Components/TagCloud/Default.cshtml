@@ -1,0 +1,18 @@
+﻿@model IEnumerable<string>
+
+<div align="center" id="myCanvasContainer" @{if (!Model.Any())
+                                             {
+                                                 @: hidden
+                                             }
+                                           }>
+    <canvas width="600" height="200" id="myCanvas">
+        <ul>
+            @foreach (var tag in Model)
+            {
+                <li>
+                    <a asp-controller="Files" asp-action="Index" asp-route-tag="@tag">@tag</a>
+                </li>
+            }
+        </ul>
+    </canvas>
+</div>

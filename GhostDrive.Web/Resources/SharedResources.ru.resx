@@ -186,4 +186,10 @@
   <data name="ShortLinkGenerating" xml:space="preserve">
     <value>Генерация короткой ссылки...</value>
   </data>
+  <data name="TechSupport" xml:space="preserve">
+    <value>Тех. Поддержка</value>
+  </data>
+  <data name="TechSupportGreeting" xml:space="preserve">
+    <value>Здравствуйте! Могу ли я вам чем-то помочь?</value>
+  </data>
 </root>
