@@ -40,6 +40,9 @@
                     <li>
                         <a asp-area="" asp-controller="Files" asp-action="Shared">@SharedLocalizer["Shared"]</a>
                     </li>
+                }
+                @if (User.IsInRole(UserRole.TechSupport.ToString()))
+                {
                     <li>
                         <a asp-area="" asp-controller="TechSupport" asp-action="Index">@SharedLocalizer["TechSupport"]</a>
                     </li>

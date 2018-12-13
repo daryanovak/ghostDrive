@@ -49,3 +49,10 @@
     }
     </tbody>
 </table>
+
+
+@await Component.InvokeAsync("TechSupport", new { userName = User.Identity.Name })
+
+@section Scripts {
+    <script src="~/js/techSupport.js" asp-append-version="true"></script>
+}

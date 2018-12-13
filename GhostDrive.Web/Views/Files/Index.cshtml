@@ -100,8 +100,11 @@
 
 <partial name="_ShareModal"/>
 
+@await Component.InvokeAsync("TechSupport", new { userName = User.Identity.Name })
+
 @section Scripts {
     <script src="~/js/files.js" asp-append-version="true"></script>
     <script src="~/js/tagCloud.js" asp-append-version="true"></script>
     <script src="~/js/shareModal.js" asp-append-version="true"></script>
+    <script src="~/js/techSupport.js" asp-append-version="true"></script>
 }
